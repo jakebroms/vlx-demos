@@ -112,8 +112,15 @@
 
     /* Each export unpacks itself with a wireframe placeholder and a status badge before
        the real screen mounts. A switch loads into a fresh frame kept invisible until
-       that is over; the frame on screen stays put until then, so nothing flickers. */
+       that is over; the frame on screen stays put until then, so nothing flickers.
+       The new frame then fades in over the old one. */
+    iframe { transition: opacity 320ms ease; }
     iframe.loading { visibility: hidden; }
+    iframe.entering { opacity: 0; }
+
+    /* A web <-> phone switch changes the whole layout, so the stage fades through it */
+    .stage { transition: opacity 220ms ease; }
+    .stage.dim { opacity: 0; }
 
     /* Mobile paths sit in a phone frame on a lifted panel */
     body.phone main { padding: 8px 8px 8px 0; }
@@ -177,7 +184,7 @@
       :root { --open: 200px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      nav, button svg { transition: none; }
+      nav, button svg, iframe, .stage { transition: none; }
     }
   </style>
 </head>
@@ -231,7 +238,7 @@
     // have arrived, or after a generous cutoff so an error inside it still shows.
     function load(src, title, phone) {
       const frame = document.createElement('iframe');
-      frame.className = 'loading';
+      frame.className = 'loading entering';
       frame.title = title;
       frame.dataset.src = src;
       frame.src = src;
@@ -249,17 +256,43 @@
         const fonts = doc && doc.fonts ? doc.fonts.ready : Promise.resolve();
         Promise.race([fonts, new Promise(r => setTimeout(r, 1500))]).then(() => {
           if (pending !== frame) return;
-          requestAnimationFrame(() => {
-            // The phone frame appears with the app already in it, never around a web demo
-            document.body.classList.toggle('phone', phone);
-            fitPhone();
-            frame.classList.remove('loading');
-            if (shown) shown.remove();
-            shown = frame;
-            pending = null;
+          const flip = shown && document.body.classList.contains('phone') !== phone;
+          if (!flip) { reveal(frame, phone); return; }
+          // The layout itself changes: fade the stage out, flip it, bring the new
+          // frame in on its own, and fade back. A web demo never shows inside the phone.
+          stageBox.classList.add('dim');
+          settle(stageBox, () => {
+            if (pending !== frame) { stageBox.classList.remove('dim'); return; }
+            shown.remove();
+            shown = null;
+            reveal(frame, phone);
+            stageBox.classList.remove('dim');
           });
         });
       })();
+    }
+
+    // Put the loaded frame on screen, fading it in over whatever is there, then drop the old one
+    function reveal(frame, phone) {
+      document.body.classList.toggle('phone', phone);
+      fitPhone();
+      frame.classList.remove('loading');
+      const old = shown;
+      shown = frame;
+      pending = null;
+      void frame.offsetWidth; // commit the transparent state so the fade has a start point
+      frame.classList.remove('entering');
+      // The old frame sits underneath, so it can wait for the fade to finish
+      if (old) settle(frame, () => old.remove(), 2000);
+    }
+
+    // Run fn once el's transition has ended, or after a fallback for when there is none
+    function settle(el, fn, fallback) {
+      let done = false;
+      const go = () => { if (done) return; done = true; el.removeEventListener('transitionend', onEnd); fn(); };
+      const onEnd = e => { if (e.target === el) go(); };
+      el.addEventListener('transitionend', onEnd);
+      setTimeout(go, fallback || 450);
     }
 
     // Scale the real-size phone down to whatever room the stage has
