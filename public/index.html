@@ -3,9 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello World</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>VivaLynx demos</title>
+  <style>
+    :root {
+      --primary: #006B68;
+      --primary-tint: #E7F8F6;
+      --ink: #0F1A1A;
+      --muted: #5B6B6A;
+      --line: #E3E8E8;
+      --side: #FFFFFF;
+      --stage: #F4F6F6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--stage);
+    }
+    nav {
+      flex: 0 0 248px;
+      display: flex;
+      flex-direction: column;
+      background: var(--side);
+      border-right: 1px solid var(--line);
+    }
+    .brand {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .brand span {
+      margin-left: 6px;
+      padding: 2px 6px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      vertical-align: 3px;
+    }
+    .label {
+      padding: 18px 20px 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    ul { list-style: none; padding: 0 8px; }
+    a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    a small {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    a:hover { background: var(--stage); }
+    a[aria-current="page"] { background: var(--primary-tint); color: var(--primary); }
+    a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    main { flex: 1; min-width: 0; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
+    @media (max-width: 720px) {
+      body { flex-direction: column; }
+      nav { flex: 0 0 auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .label { display: none; }
+      ul { display: flex; gap: 4px; padding: 8px; overflow-x: auto; }
+      a { white-space: nowrap; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <nav aria-label="Demo paths">
+    <div class="brand">VivaLynx<span>Demos</span></div>
+    <div class="label">Paths</div>
+    <ul>
+      <li><a href="#org" data-src="/org/">Organization admin<small>Web</small></a></li>
+      <li><a href="#care-coordinator" data-src="/care-coordinator/">Care Coordinator<small>Web</small></a></li>
+      <li><a href="#professional-caregiver" data-src="/professional-caregiver/">Professional Caregiver<small>Mobile</small></a></li>
+    </ul>
+  </nav>
+  <main>
+    <iframe id="stage" title="Demo"></iframe>
+  </main>
+  <script>
+    const links = [...document.querySelectorAll('nav a')];
+    const stage = document.getElementById('stage');
+
+    function show() {
+      const current = links.find(a => a.hash === location.hash) || links[0];
+      links.forEach(a => a.removeAttribute('aria-current'));
+      current.setAttribute('aria-current', 'page');
+      stage.title = current.firstChild.textContent;
+      if (stage.getAttribute('src') !== current.dataset.src) stage.src = current.dataset.src;
+    }
+
+    window.addEventListener('hashchange', show);
+    show();
+  </script>
 </body>
 </html>
