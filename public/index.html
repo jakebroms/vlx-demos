@@ -97,13 +97,23 @@
     a[aria-current="page"] .mark { border-color: var(--accent); color: var(--accent); }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     main { flex: 1; min-width: 0; padding: 8px 8px 8px 0; }
-    .stage, .device { position: relative; width: 100%; height: 100%; }
-    iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 10px; background: #fff; }
+    .stage, .device, .screen { position: relative; width: 100%; height: 100%; }
+    .screen { border-radius: 10px; overflow: hidden; background: var(--rail-raised); }
+    .screen::before {
+      content: "Loading…";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      color: var(--rail-muted);
+    }
+    iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
 
     /* Each export unpacks itself with a wireframe placeholder and a status badge before
-       the real screen mounts. Keep the frame invisible until that is over, then fade in. */
-    iframe { opacity: 0; transition: opacity 180ms ease; }
-    body.ready iframe { opacity: 1; }
+       the real screen mounts. A switch loads into a fresh frame kept invisible until
+       that is over; the frame on screen stays put until then, so nothing flickers. */
+    iframe.loading { visibility: hidden; }
 
     /* Mobile paths sit in a phone frame on a lifted panel */
     body.phone main { padding: 8px 8px 8px 0; }
@@ -159,7 +169,7 @@
       transform: translateX(-50%);
     }
     body.phone .status svg { display: block; }
-    body.phone iframe { flex: 0 0 844px; height: 844px; border-radius: 0 0 48px 48px; }
+    body.phone .screen { flex: 0 0 844px; height: 844px; border-radius: 0 0 48px 48px; }
     @media (max-height: 560px) {
       body.phone .stage { padding: 16px; }
     }
@@ -193,50 +203,62 @@
             <span>9:41</span>
             <svg width="66" height="12" viewBox="0 0 66 12" fill="#000"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M31 3.2a9 9 0 0 1 11 0l-1.3 1.5a7 7 0 0 0-8.4 0zM33.4 6a5.3 5.3 0 0 1 6.2 0l-1.3 1.5a3.3 3.3 0 0 0-3.6 0zM36.5 8.6l1.6 1.8-1.6 1.6-1.6-1.6z"/><rect x="45.5" y="0.5" width="18" height="11" rx="3" fill="none" stroke="#000" opacity="0.4"/><rect x="47" y="2" width="15" height="8" rx="1.8"/><rect x="64.5" y="4" width="1.5" height="4" rx="0.7" opacity="0.4"/></svg>
           </div>
-          <iframe id="stage" title="Demo"></iframe>
+          <div class="screen" id="screen"></div>
         </div>
       </div>
     </div>
   </main>
   <script>
     const links = [...document.querySelectorAll('nav a')];
-    const stage = document.getElementById('stage');
+    const screen = document.getElementById('screen');
     const toggle = document.querySelector('nav button');
+    let shown = null;    // the frame on screen
+    let pending = null;  // the frame being loaded for a switch
 
     function show() {
       const current = links.find(a => a.hash === location.hash) || links[0];
       links.forEach(a => a.removeAttribute('aria-current'));
       current.setAttribute('aria-current', 'page');
-      stage.title = current.title;
-      document.body.classList.toggle('phone', current.dataset.device === 'phone');
-      fitPhone();
-      if (stage.getAttribute('src') !== current.dataset.src) {
-        document.body.classList.remove('ready');
-        stage.src = current.dataset.src;
-        waitForDemo();
-      }
+      const src = current.dataset.src;
+      if (pending && pending.dataset.src === src) return;
+      if (pending) { pending.remove(); pending = null; }
+      if (shown && shown.dataset.src === src) return;
+      load(src, current.title, current.dataset.device === 'phone');
     }
 
-    // Reveal the frame once the export has swapped its placeholder for the real app
-    // and the fonts it asked for have arrived (or after a generous cutoff).
-    let waitId = 0;
-    function waitForDemo() {
-      const id = ++waitId;
+    // Load a path into a fresh, hidden frame. Reveal it and drop the old one once the
+    // export has swapped its placeholder for the real app and the fonts it asked for
+    // have arrived, or after a generous cutoff so an error inside it still shows.
+    function load(src, title, phone) {
+      const frame = document.createElement('iframe');
+      frame.className = 'loading';
+      frame.title = title;
+      frame.dataset.src = src;
+      frame.src = src;
+      screen.appendChild(frame);
+      pending = frame;
+
       const started = Date.now();
       (function poll() {
-        if (id !== waitId) return;
+        if (pending !== frame) return;
         let doc = null;
-        try { doc = stage.contentDocument; } catch (e) {}
+        try { doc = frame.contentDocument; } catch (e) {}
         const root = doc && doc.getElementById('dc-root');
         const mounted = root && root.children.length > 0 && !doc.getElementById('__bundler_thumbnail');
-        if (mounted || Date.now() - started > 15000) {
-          const fonts = doc && doc.fonts ? doc.fonts.ready : Promise.resolve();
-          Promise.race([fonts, new Promise(r => setTimeout(r, 1500))]).then(() => {
-            if (id === waitId) requestAnimationFrame(() => document.body.classList.add('ready'));
+        if (!mounted && Date.now() - started < 15000) { setTimeout(poll, 50); return; }
+        const fonts = doc && doc.fonts ? doc.fonts.ready : Promise.resolve();
+        Promise.race([fonts, new Promise(r => setTimeout(r, 1500))]).then(() => {
+          if (pending !== frame) return;
+          requestAnimationFrame(() => {
+            // The phone frame appears with the app already in it, never around a web demo
+            document.body.classList.toggle('phone', phone);
+            fitPhone();
+            frame.classList.remove('loading');
+            if (shown) shown.remove();
+            shown = frame;
+            pending = null;
           });
-          return;
-        }
-        setTimeout(poll, 50);
+        });
       })();
     }
 
