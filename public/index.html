@@ -7,90 +7,117 @@
   <title>VivaLynx demos</title>
   <style>
     :root {
-      --primary: #006B68;
-      --primary-tint: #E7F8F6;
-      --ink: #0F1A1A;
-      --muted: #5B6B6A;
-      --line: #E3E8E8;
-      --side: #FFFFFF;
-      --stage: #F4F6F6;
+      --rail: #0B0B0C;
+      --rail-raised: #1A1A1C;
+      --rail-line: #262629;
+      --rail-ink: #F2F2F3;
+      --rail-muted: #8C8C93;
+      --accent: #2FC4BE;
+      --stage: #0B0B0C;
+      --open: 232px;
+      --shut: 56px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
       display: flex;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
       background: var(--stage);
+      color: var(--rail-ink);
     }
     nav {
-      flex: 0 0 248px;
+      flex: 0 0 var(--open);
       display: flex;
       flex-direction: column;
-      background: var(--side);
-      border-right: 1px solid var(--line);
+      background: var(--rail);
+      overflow: hidden;
+      transition: flex-basis 160ms ease;
     }
-    .brand {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--primary);
+    body.shut nav { flex-basis: var(--shut); }
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 52px;
+      padding: 0 10px 0 16px;
+      border-bottom: 1px solid var(--rail-line);
     }
-    .brand span {
-      margin-left: 6px;
-      padding: 2px 6px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
-      vertical-align: 3px;
+    .top p {
+      flex: 1;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rail-muted);
+      white-space: nowrap;
     }
-    .label {
-      padding: 18px 20px 8px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    ul { list-style: none; padding: 0 8px; }
-    a {
-      display: block;
-      padding: 10px 12px;
+    body.shut .top { padding: 0; justify-content: center; }
+    body.shut .top p { display: none; }
+    button {
+      flex: 0 0 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 0;
       border-radius: 8px;
-      color: var(--ink);
+      background: transparent;
+      color: var(--rail-muted);
+      cursor: pointer;
+    }
+    button:hover { background: var(--rail-raised); color: var(--rail-ink); }
+    button svg { transition: transform 160ms ease; }
+    body.shut button svg { transform: rotate(180deg); }
+    ul { list-style: none; padding: 10px 8px; display: grid; gap: 2px; }
+    a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      color: var(--rail-ink);
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
+      white-space: nowrap;
     }
-    a small {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--muted);
+    a:hover { background: var(--rail-raised); }
+    .mark {
+      flex: 0 0 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--rail-line);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--rail-muted);
     }
-    a:hover { background: var(--stage); }
-    a[aria-current="page"] { background: var(--primary-tint); color: var(--primary); }
-    a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-    main { flex: 1; min-width: 0; }
-    iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
+    .name { font-size: 14px; font-weight: 500; }
+    .name small { display: block; font-size: 11px; font-weight: 400; color: var(--rail-muted); }
+    body.shut .name { display: none; }
+    a[aria-current="page"] { background: var(--rail-raised); }
+    a[aria-current="page"] .mark { border-color: var(--accent); color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    main { flex: 1; min-width: 0; padding: 8px 8px 8px 0; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 10px; background: #fff; }
     @media (max-width: 720px) {
-      body { flex-direction: column; }
-      nav { flex: 0 0 auto; border-right: 0; border-bottom: 1px solid var(--line); }
-      .label { display: none; }
-      ul { display: flex; gap: 4px; padding: 8px; overflow-x: auto; }
-      a { white-space: nowrap; }
+      :root { --open: 200px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      nav, button svg { transition: none; }
     }
   </style>
 </head>
 <body>
   <nav aria-label="Demo paths">
-    <div class="brand">VivaLynx<span>Demos</span></div>
-    <div class="label">Paths</div>
-    <ul>
-      <li><a href="#org" data-src="/org/">Organization admin<small>Web</small></a></li>
-      <li><a href="#care-coordinator" data-src="/care-coordinator/">Care Coordinator<small>Web</small></a></li>
-      <li><a href="#professional-caregiver" data-src="/professional-caregiver/">Professional Caregiver<small>Mobile</small></a></li>
+    <div class="top">
+      <p>Demo paths</p>
+      <button type="button" aria-expanded="true" aria-controls="paths" aria-label="Collapse sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+    </div>
+    <ul id="paths">
+      <li><a href="#org" data-src="/org/" title="Organization admin"><span class="mark" aria-hidden="true">OA</span><span class="name">Organization admin<small>Web</small></span></a></li>
+      <li><a href="#care-coordinator" data-src="/care-coordinator/" title="Care Coordinator"><span class="mark" aria-hidden="true">CC</span><span class="name">Care Coordinator<small>Web</small></span></a></li>
+      <li><a href="#professional-caregiver" data-src="/professional-caregiver/" title="Professional Caregiver"><span class="mark" aria-hidden="true">PC</span><span class="name">Professional Caregiver<small>Mobile</small></span></a></li>
     </ul>
   </nav>
   <main>
@@ -99,15 +126,28 @@
   <script>
     const links = [...document.querySelectorAll('nav a')];
     const stage = document.getElementById('stage');
+    const toggle = document.querySelector('nav button');
 
     function show() {
       const current = links.find(a => a.hash === location.hash) || links[0];
       links.forEach(a => a.removeAttribute('aria-current'));
       current.setAttribute('aria-current', 'page');
-      stage.title = current.firstChild.textContent;
+      stage.title = current.title;
       if (stage.getAttribute('src') !== current.dataset.src) stage.src = current.dataset.src;
     }
 
+    function setShut(shut) {
+      document.body.classList.toggle('shut', shut);
+      toggle.setAttribute('aria-expanded', String(!shut));
+      toggle.setAttribute('aria-label', shut ? 'Expand sidebar' : 'Collapse sidebar');
+      try { localStorage.setItem('demos-sidebar', shut ? 'shut' : 'open'); } catch (e) {}
+    }
+
+    let saved = null;
+    try { saved = localStorage.getItem('demos-sidebar'); } catch (e) {}
+    setShut(saved === 'shut');
+
+    toggle.addEventListener('click', () => setShut(!document.body.classList.contains('shut')));
     window.addEventListener('hashchange', show);
     show();
   </script>
