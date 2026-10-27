@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Invitation email: VivaLynx for NYSOFA (demo)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #006B68;
+      --t50: #E7F8F6;
+      --t100: #CFF3EE;
+      --t600: #008A83;
+      --t900: #064542;
+      --t950: #032F2D;
+      --amber: #C98A1E;
+      --amber-dark: #78510D;
+      --amber-tint: #FFF9E8;
+      --amber-border: #FFE8A3;
+      --ink: #172033;
+      --muted: #5B6472;
+      --border: #D8DEE8;
+      --surface: #F8FAFC;
+      --serif: Literata, Georgia, "Times New Roman", serif;
+      --sans: "Source Sans 3", system-ui, "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--surface); }
+    body {
+      min-height: 100%;
+      font: 400 18px/1.7 var(--sans);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--primary); }
+
+    /* Demo strip above the mail client */
+    .demo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 14px;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+    }
+    .demo b { font-weight: 700; color: var(--ink); }
+    .chip {
+      display: inline-block;
+      padding: 1px 8px;
+      border: 1px solid var(--amber);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+
+    /* Mail client chrome */
+    .client { max-width: 900px; margin: 0 auto; padding: 24px 16px 96px; }
+    .subject {
+      font: 600 24px/1.3 var(--serif);
+      font-variation-settings: "opsz" 24;
+      letter-spacing: -0.01em;
+      margin: 8px 0 18px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      gap: 12px 14px;
+      align-items: start;
+      padding: 0 0 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--t50);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .meta .from b { font-weight: 700; }
+    .meta .from span { color: var(--muted); }
+    .meta .to { color: var(--muted); }
+    .meta .date { color: var(--muted); white-space: nowrap; font-size: 15px; }
+
+    /* The email itself, at a real email width */
+    .mail {
+      max-width: 640px;
+      margin: 28px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--t50);
+    }
+    .band img { height: 30px; width: auto; display: block; }
+    .band span { font-size: 15px; line-height: 20px; color: var(--t900); font-weight: 600; text-align: right; max-width: 230px; }
+    .body { padding: 32px 32px 8px; }
+    .body p { margin: 0 0 16px; }
+    .body h1 {
+      font: 700 32px/1.15 var(--serif);
+      font-variation-settings: "opsz" 32;
+      letter-spacing: -0.015em;
+      margin: 0 0 16px;
+    }
+    .body h2 {
+      font: 600 22px/1.3 var(--serif);
+      font-variation-settings: "opsz" 22;
+      letter-spacing: -0.01em;
+      margin: 32px 0 12px;
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .code {
+      margin: 24px 0;
+      padding: 20px 24px;
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
+      background: var(--amber-tint);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 24px;
+    }
+    .code .eyebrow { color: var(--amber-dark); }
+    .code strong {
+      display: block;
+      font: 700 40px/1.1 var(--serif);
+      font-variation-settings: "opsz" 40;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .code small { font-size: 16px; line-height: 24px; color: var(--muted); max-width: 240px; }
+
+    ol.steps { list-style: none; counter-reset: step; margin: 0 0 8px; }
+    ol.steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 0 16px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+    }
+    ol.steps li:first-child { border-top: 0; }
+    ol.steps li::before {
+      content: counter(step);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    ol.steps b { display: block; font-size: 20px; line-height: 1.4; font-weight: 600; }
+    ol.steps p { margin: 4px 0 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
+    .stores { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .store, .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .store { border: 1px solid var(--ink); color: var(--ink); background: #fff; }
+    .btn { background: var(--primary); color: #fff; border: 1px solid var(--primary); font-size: 18px; padding: 12px 24px; }
+    .btn:hover { background: var(--t600); }
+    .cta { margin: 28px 0 8px; }
+    svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* Animated sign-up preview, the "GIF" of the email */
+    .gif { margin: 28px 0 8px; padding: 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+    .gif .eyebrow { margin-bottom: 14px; }
+    .gif-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 36px; }
+    .phone {
+      position: relative;
+      width: 272px;
+      height: 560px;
+      flex-shrink: 0;
+      padding: 10px;
+      border-radius: 40px;
+      background: #0B0B0C;
+      box-shadow: 0 0 0 2px #3A3A3F;
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 84px;
+      height: 24px;
+      border-radius: 12px;
+      background: #0B0B0C;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+    .glass { position: relative; width: 100%; height: 100%; border-radius: 31px; overflow: hidden; background: #fff; }
+    .scr {
+      position: absolute;
+      inset: 0;
+      padding: 56px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: 0;
+      transition: opacity 240ms ease;
+    }
+    .scr.on { opacity: 1; }
+    .scr .logo { height: 22px; width: auto; margin-bottom: 18px; }
+    .scr h3 { font: 600 20px/1.25 var(--serif); font-variation-settings: "opsz" 20; letter-spacing: -0.01em; margin: 0 0 6px; }
+    .scr .sub { color: var(--muted); font-size: 13px; line-height: 1.45; margin-bottom: 14px; }
+    .fld { margin-bottom: 10px; }
+    .fld label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .fld .in {
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      background: #fff;
+    }
+    .fld .in.focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--t100); }
+    .fld .in.code-in { font: 700 20px/1 var(--serif); letter-spacing: 0.12em; height: 48px; }
+    .caret { display: inline-block; width: 1px; height: 18px; margin-left: 1px; background: var(--ink); vertical-align: -3px; opacity: 0; }
+    .in.focus .caret { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 1; } }
+    .pbtn {
+      margin-top: auto;
+      height: 44px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 120ms ease, background 120ms ease;
+    }
+    .pbtn.press { transform: scale(0.97); background: var(--t900); }
+    .pbtn.ghost { background: #fff; color: var(--primary); border: 1px solid var(--primary); margin-top: 8px; }
+    .pbtn .spin { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: turn 0.8s linear infinite; }
+    @keyframes turn { to { transform: rotate(360deg); } }
+    .done { text-align: center; padding-top: 56px; }
+    .check {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--t50);
+      color: var(--primary);
+      transform: scale(0.6);
+      opacity: 0;
+      transition: transform 260ms cubic-bezier(.2,.9,.3,1.3), opacity 200ms ease;
+    }
+    .scr.on .check { transform: scale(1); opacity: 1; }
+    .check svg { width: 44px; height: 44px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .done h3 { font-size: 24px; }
+    .done .sub { font-size: 14px; }
+    .tag { display: inline-block; margin: 2px 0 14px; padding: 3px 10px; border-radius: 6px; background: var(--amber-tint); border: 1px solid var(--amber-border); color: var(--amber-dark); font-size: 12px; font-weight: 700; }
+    .gif-text { flex: 1 1 220px; min-width: 0; }
+    .gif-text p { font-size: 16px; line-height: 1.55; color: var(--muted); margin: 0 0 12px; }
+    .ctrl { display: flex; gap: 8px; }
+    .ctrl button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: 600 14px/20px var(--sans);
+      cursor: pointer;
+    }
+    .ctrl button:hover { border-color: var(--ink); }
+    .ctrl svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    .ctrl .fill svg { fill: currentColor; stroke: none; }
+
+    .help { margin: 24px 0 0; padding: 20px 24px; border-radius: 8px; background: var(--t50); font-size: 17px; line-height: 1.6; }
+    .help b { font-weight: 700; }
+    .foot {
+      margin-top: 24px;
+      padding: 20px 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+    }
+    .foot p { margin: 0 0 8px; }
+    .foot a { color: var(--muted); }
+
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .band, .body, .foot { padding-left: 20px; padding-right: 20px; }
+      .body h1 { font-size: 28px; }
+      .meta { grid-template-columns: 44px minmax(0, 1fr); }
+      .meta .date { grid-column: 2; white-space: normal; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scr, .check, .pbtn { transition: none; }
+      .in.focus .caret { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+    <span class="chip">Demo</span>
+    <span><b>Stop 1 of 3: the invitation.</b> What a participant enrolled at hospital discharge receives. Nothing here is a live program.</span>
+  </div>
+
+  <div class="client">
+    <h1 class="subject">Your VivaLynx membership is covered by the NYSOFA pilot</h1>
+    <div class="meta">
+      <div class="avatar" aria-hidden="true">VL</div>
+      <div>
+        <div class="from"><b>VivaLynx for Oneida County Office for the Aging</b> <span>&lt;hello@vivalynx.com&gt;</span></div>
+        <div class="to">to Margaret Ellis &lt;margaret.ellis@example.com&gt;</div>
+      </div>
+      <div class="date">Fri, Oct 24, 2026, 10:12 AM</div>
+    </div>
+
+    <article class="mail" aria-label="Email message">
+      <div class="band">
+        <img src="../assets/vivalynx-lockup.svg" alt="VivaLynx">
+        <span>for the NYSOFA Technology-Enabled Aging-in-Place Pilot</span>
+      </div>
+
+      <div class="body">
+        <p>Hi Margaret,</p>
+        <h1>Your VivaLynx membership is covered.</h1>
+        <p>Oneida County Office for the Aging has enrolled you in the NYSOFA Aging-in-Place Pilot, so VivaLynx costs you nothing: $0 today and $0 a month for the length of the pilot. It keeps you and the people you choose connected, with daily check-ins, medication reminders and a video call that is one tap away.</p>
+
+        <div class="code">
+          <div>
+            <div class="eyebrow">Your access code</div>
+            <strong>NYSOFA</strong>
+          </div>
+          <small>Enter it once, when you set up your account. That is the only thing you need.</small>
+        </div>
+
+        <h2>Three steps, about a minute</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <b>Get the app</b>
+              <p>On the smartphone or tablet you already own. If you don’t have one, your county office can lend you a tablet with internet included.</p>
+              <div class="stores">
+                <a class="store" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Download on the App Store</a>
+                <a class="store" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Get it on Google Play</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <b>Create your account and enter your code</b>
+              <p>Your name, your email and a password. When the app asks for an access code, type <b>NYSOFA</b>. You’ll see a message confirming the pilot is covering you.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <b>Invite your care circle</b>
+              <p>We’ve already invited <b>Maria Ellis</b>, your daughter, because you named her at the hospital. Add anyone else you choose: family, a neighbor, your home care aide. Each person decides whether to join.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="gif">
+          <div class="eyebrow">What setup looks like</div>
+          <div class="gif-row">
+            <div class="phone" id="phone" aria-label="Animated preview of signing up and entering the access code">
+              <div class="glass">
+                <div class="scr" id="s1">
+                  <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
+                  <h3>Create your account</h3>
+                  <div class="sub">Your details stay private. You choose who sees what.</div>
+                  <div class="fld"><label>Your name</label><div class="in" id="f-name"><span class="t"></span><span class="caret"></span></div></div>
+                  <div class="fld"><label>Email</label><div class="in" id="f-email"><span class="t"></span><span class="caret"></span></div></div>
+                  <div class="fld"><label>Password</label><div class="in" id="f-pass"><span class="t"></span><span class="caret"></span></div></div>
+                  <div class="pbtn" id="b1">Continue</div>
+                </div>
+                <div class="scr" id="s2">
+                  <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
+                  <h3>Do you have an access code?</h3>
+                  <div class="sub">If a county office, hospital or program gave you a code, enter it here. If not, skip this step.</div>
+                  <div class="fld"><label>Access code</label><div class="in code-in" id="f-code"><span class="t"></span><span class="caret"></span></div></div>
+                  <div class="pbtn" id="b2">Apply code</div>
+                  <div class="pbtn ghost">Skip for now</div>
+                </div>
+                <div class="scr done" id="s3">
+                  <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+                  <h3>You’re covered</h3>
+                  <span class="tag">NYSOFA Aging-in-Place Pilot</span>
+                  <div class="sub">Your VivaLynx membership is paid for by the pilot. $0 today, $0 a month.</div>
+                  <div class="pbtn">Invite your care circle</div>
+                </div>
+              </div>
+            </div>
+            <div class="gif-text">
+              <p>Create an account, type the code, done. The animation loops; in the real email it is a short GIF.</p>
+              <div class="ctrl">
+                <button type="button" id="play" class="fill" aria-label="Pause"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg><span>Pause</span></button>
+                <button type="button" id="replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg><span>Replay</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="cta"><a class="btn" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Get the VivaLynx app</a></p>
+
+        <div class="help">
+          <b>Would you rather do this with someone?</b> Call Oneida County Office for the Aging and ask for the VivaLynx pilot, or reply to this email. They can set it up with you over the phone or at your kitchen table, and can lend you a tablet if you need one.
+        </div>
+      </div>
+
+      <div class="foot">
+        <p>You’re receiving this because Oneida County Office for the Aging enrolled you in the NYSOFA Technology-Enabled Aging-in-Place Pilot on Oct 24, 2026. VivaLynx sent it on their behalf. Taking part is voluntary, and you can stop at any time.</p>
+        <p><a href="#">Privacy</a> · <a href="#">How the pilot works</a> · <a href="#">Unsubscribe</a></p>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    // A small timeline that plays the sign-up like a looping GIF.
+    const s = id => document.getElementById(id);
+    const screens = ['s1', 's2', 's3'].map(s);
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let run = 0, playing = false;
+
+    function showScreen(i) { screens.forEach((el, k) => el.classList.toggle('on', k === i)); }
+    function reset() {
+      ['f-name', 'f-email', 'f-pass', 'f-code'].forEach(id => { const f = s(id); f.querySelector('.t').textContent = ''; f.classList.remove('focus'); });
+      ['b1', 'b2'].forEach(id => { s(id).classList.remove('press'); s(id).textContent = id === 'b1' ? 'Continue' : 'Apply code'; });
+    }
+    async function type(id, text, per, token) {
+      const f = s(id), t = f.querySelector('.t');
+      f.classList.add('focus');
+      for (const ch of text) { if (token !== run) return; t.textContent += ch; await wait(per); }
+      f.classList.remove('focus');
+    }
+    async function press(id, token, busy) {
+      const b = s(id); b.classList.add('press'); await wait(160); if (token !== run) return;
+      b.classList.remove('press');
+      if (busy) { b.innerHTML = '<span class="spin" aria-hidden="true"></span>'; await wait(700); }
+    }
+    async function play() {
+      const token = ++run;
+      playing = true; setPlayBtn();
+      while (token === run) {
+        reset(); showScreen(0); await wait(700); if (token !== run) return;
+        await type('f-name', 'Margaret Ellis', 70, token);
+        await type('f-email', 'margaret.ellis@example.com', 45, token);
+        await type('f-pass', '••••••••••', 60, token);
+        await wait(400); await press('b1', token); if (token !== run) return;
+        showScreen(1); await wait(900); if (token !== run) return;
+        await type('f-code', 'NYSOFA', 170, token);
+        await wait(400); await press('b2', token, true); if (token !== run) return;
+        showScreen(2); await wait(4200);
+      }
+    }
+    function stop() { run++; playing = false; setPlayBtn(); }
+    function setPlayBtn() {
+      const b = s('play');
+      b.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+      b.querySelector('span').textContent = playing ? 'Pause' : 'Play';
+      b.querySelector('svg').innerHTML = playing
+        ? '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>'
+        : '<polygon points="6 3 20 12 6 21 6 3"/>';
+    }
+    s('play').addEventListener('click', () => playing ? stop() : play());
+    s('replay').addEventListener('click', () => { stop(); play(); });
+
+    // Reduced motion: rest on the finished screen; a click on Play still runs it.
+    if (reduced) { reset(); showScreen(2); playing = false; setPlayBtn(); }
+    else play();
+  </script>
+</body>
+</html>

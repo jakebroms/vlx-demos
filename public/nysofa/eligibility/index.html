@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>VivaLynx for eligible older New Yorkers (demo)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #006B68;
+      --t50: #E7F8F6;
+      --t100: #CFF3EE;
+      --t600: #008A83;
+      --t900: #064542;
+      --t950: #032F2D;
+      --amber: #C98A1E;
+      --amber-dark: #78510D;
+      --amber-tint: #FFF9E8;
+      --amber-border: #FFE8A3;
+      --ink: #172033;
+      --muted: #5B6472;
+      --border: #D8DEE8;
+      --surface: #F8FAFC;
+      --serif: Literata, Georgia, "Times New Roman", serif;
+      --sans: "Source Sans 3", system-ui, "Segoe UI", Arial, sans-serif;
+      --wrap: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #fff; scroll-behavior: smooth; }
+    body { font: 400 18px/1.7 var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    a { color: var(--primary); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; }
+    h1 { font-size: 48px; line-height: 1.08; letter-spacing: -0.02em; font-weight: 700; font-variation-settings: "opsz" 48; }
+    h2 { font-size: 36px; line-height: 1.2; letter-spacing: -0.015em; font-variation-settings: "opsz" 36; }
+    h3 { font-size: 24px; line-height: 1.3; letter-spacing: -0.01em; font-variation-settings: "opsz" 24; }
+    .lead { font-size: 20px; line-height: 1.55; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .kicker { color: var(--amber-dark); }
+    .measure { max-width: 68ch; }
+    p + p { margin-top: 16px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1px solid var(--primary);
+      background: var(--primary);
+      color: #fff;
+      font: 600 18px/24px var(--sans);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--t600); border-color: var(--t600); }
+    .btn.quiet { background: transparent; color: var(--primary); }
+    .btn.quiet:hover { background: var(--t50); }
+    .btn.dark { background: #fff; color: var(--t900); border-color: #fff; }
+    .btn.dark:hover { background: var(--t50); }
+    svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+    .on-dark :focus-visible { outline-color: #fff; }
+
+    .demo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 14px;
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+    }
+    .demo b { color: var(--ink); font-weight: 700; }
+    .chip { display: inline-block; padding: 1px 8px; border: 1px solid var(--ink); border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+
+    header.site { border-bottom: 1px solid var(--border); }
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 76px; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--ink); }
+    .brand img { height: 32px; width: auto; display: block; }
+    .brand span { font-size: 15px; line-height: 20px; color: var(--muted); border-left: 1px solid var(--border); padding-left: 14px; }
+    header.site .btn { padding: 10px 18px; font-size: 16px; }
+
+    /* Hero: one dominant column and a side panel */
+    .hero { padding: 96px 0 72px; }
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 48px 64px; align-items: start; }
+    .hero h1 { margin: 16px 0 24px; }
+    .hero .lead { max-width: 60ch; }
+    .hero .act { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 32px; align-items: center; }
+    .hero .act a.more { font-weight: 600; }
+    .glance { border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+    .glance .eyebrow { color: var(--muted); margin-bottom: 12px; }
+    .glance ul { list-style: none; }
+    .glance li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); font-size: 17px; line-height: 1.5; }
+    .glance li:first-child { border-top: 0; padding-top: 0; }
+    .glance svg.i { color: var(--primary); margin-top: 3px; }
+
+    /* Who runs it: a single ruled row, text only */
+    .runs { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .runs .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .runs div { padding: 24px 24px 24px 0; font-size: 16px; line-height: 24px; }
+    .runs div + div { padding-left: 24px; border-left: 1px solid var(--border); }
+    .runs b { display: block; font-weight: 700; }
+    .runs span { color: var(--muted); }
+
+    /* What you get to do: rows with verb-first headings beside one serif sentence */
+    .gets { background: var(--t50); padding: 96px 0; }
+    .gets .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px 80px; align-items: start; }
+    .gets .side { position: sticky; top: 32px; }
+    .gets .side h2 { margin: 12px 0 16px; }
+    .gets .side p { color: var(--muted); }
+    .gets dl { border-top: 1px solid var(--t100); }
+    .gets dt { padding-top: 24px; }
+    .gets dd { padding: 6px 0 24px; border-bottom: 1px solid var(--t100); color: var(--ink); max-width: 56ch; }
+
+    /* One sentence, large, on the deep ground */
+    .deep { background: var(--t950); color: #fff; padding: 96px 0; }
+    .deep p { font: 600 40px/1.2 var(--serif); font-variation-settings: "opsz" 40; letter-spacing: -0.015em; max-width: 24ch; }
+    .deep small { display: block; margin-top: 20px; font: 400 16px/24px var(--sans); color: var(--t100); }
+
+    /* Who qualifies */
+    .who { padding: 96px 0; }
+    .who .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px 80px; }
+    .who h2 { margin: 12px 0 16px; }
+    .who ul { list-style: none; margin-top: 8px; }
+    .who li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-top: 1px solid var(--border); }
+    .who li:first-child { border-top: 0; padding-top: 0; }
+    .who li svg.i { color: var(--primary); margin-top: 5px; }
+    .who li b { font-weight: 700; }
+    .who .counties { margin-top: 28px; padding: 20px 24px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); font-size: 16px; line-height: 24px; }
+    .who .counties b { display: block; font-weight: 700; margin-bottom: 4px; }
+
+    /* How it works: a numbered run */
+    .how { padding: 0 0 96px; }
+    .how h2 { margin: 12px 0 32px; }
+    .how ol { list-style: none; counter-reset: n; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .how li { counter-increment: n; padding: 24px; border: 1px solid var(--border); border-radius: 8px; }
+    .how li::before { content: counter(n); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; margin-bottom: 14px; }
+    .how li b { display: block; font-size: 20px; line-height: 1.4; font-weight: 600; margin-bottom: 6px; }
+    .how li p { font-size: 17px; line-height: 1.6; }
+    .how .phone { margin-top: 24px; color: var(--muted); font-size: 17px; }
+
+    /* The checker */
+    .check { background: var(--t50); padding: 96px 0; }
+    .check .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px 80px; align-items: start; }
+    .check h2 { margin: 12px 0 16px; }
+    .check .note { color: var(--muted); font-size: 16px; line-height: 24px; margin-top: 16px; }
+    form.elig { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 32px; }
+    form.elig label { display: block; font-weight: 600; font-size: 17px; margin-bottom: 6px; }
+    form.elig .hint { display: block; font-weight: 400; font-size: 15px; color: var(--muted); }
+    form.elig input {
+      width: 100%;
+      height: 52px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: 400 18px/1 var(--sans);
+      color: var(--ink);
+      background: #fff;
+    }
+    form.elig input:focus { border-color: var(--primary); outline: 3px solid var(--t100); outline-offset: 0; }
+    form.elig .row { margin-bottom: 20px; }
+    form.elig .err { display: none; margin-top: 6px; font-size: 15px; color: #9A1B14; }
+    form.elig .row.bad .err { display: block; }
+    form.elig .row.bad input { border-color: #9A1B14; }
+    form.elig .btn { width: 100%; justify-content: center; margin-top: 4px; }
+    form.elig .fine { margin-top: 14px; font-size: 14px; line-height: 20px; color: var(--muted); }
+
+    .result { display: none; border-radius: 8px; padding: 32px; }
+    .result.show { display: block; }
+    .result.yes { background: #fff; border: 1px solid var(--border); }
+    .result.no { background: #fff; border: 1px solid var(--border); }
+    .result h3 { margin: 12px 0 10px; }
+    .result .code {
+      margin: 20px 0;
+      padding: 18px 24px;
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
+      background: var(--amber-tint);
+    }
+    .result .code .eyebrow { color: var(--amber-dark); }
+    .result .code strong { display: block; font: 700 40px/1.1 var(--serif); font-variation-settings: "opsz" 40; letter-spacing: 0.08em; }
+    .result .acts { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 24px; }
+    .result ul { list-style: none; margin: 16px 0 0; }
+    .result li { padding: 12px 0; border-top: 1px solid var(--border); }
+    .result li b { font-weight: 700; }
+    .result .again { margin-top: 20px; font-size: 16px; }
+
+    /* Questions people ask */
+    .faq { padding: 96px 0; }
+    .faq .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px 80px; }
+    .faq h2 { margin: 12px 0 16px; }
+    .faq dt { font-size: 22px; line-height: 1.35; font-weight: 600; padding-top: 24px; }
+    .faq dd { padding: 8px 0 24px; border-bottom: 1px solid var(--border); max-width: 60ch; }
+    .faq dd:last-child { border-bottom: 0; }
+
+    footer.site { background: var(--t900); color: var(--t100); padding: 48px 0 56px; }
+    footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px 48px; align-items: flex-start; }
+    footer.site img { height: 28px; width: auto; display: block; margin-bottom: 14px; }
+    footer.site p { font-size: 15px; line-height: 22px; max-width: 52ch; }
+    footer.site a { color: #fff; }
+    footer.site nav { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 15px; }
+
+    @media (max-width: 900px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 30px; }
+      .hero { padding: 64px 0 48px; }
+      .hero .wrap, .gets .wrap, .who .wrap, .check .wrap, .faq .wrap { grid-template-columns: minmax(0, 1fr); }
+      .gets .side { position: static; }
+      .runs .wrap { grid-template-columns: minmax(0, 1fr); }
+      .runs div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--border); }
+      .how ol { grid-template-columns: minmax(0, 1fr); }
+      .deep p { font-size: 30px; }
+      .gets, .deep, .who, .check, .faq { padding: 64px 0; }
+      .how { padding-bottom: 64px; }
+      header.site .brand span { display: none; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 16px; }
+      form.elig, .result { padding: 24px 20px; }
+      header.site .btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+    <span class="chip">Demo</span>
+    <span><b>Stop 2 of 3: the public page.</b> What a participant on a county waitlist finds when NYSOFA or their county office sends them the link. The eligibility check below is simulated and stores nothing.</span>
+  </div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="VivaLynx for the NYSOFA Aging-in-Place Pilot">
+        <img src="../assets/vivalynx-lockup.svg" alt="VivaLynx">
+        <span>for the NYSOFA Aging-in-Place Pilot</span>
+      </a>
+      <a class="btn" href="#check">Check your eligibility</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow kicker">New York State Technology-Enabled Aging-in-Place Pilot</div>
+          <h1>VivaLynx, covered for eligible older New Yorkers.</h1>
+          <p class="lead">If you are 60 or older and your county Office for the Aging is part of the pilot, the State pays for your VivaLynx membership. A daily check-in, medication reminders and one-tap video keep you close to the people you choose, from your own home.</p>
+          <div class="act">
+            <a class="btn" href="#check">Check your eligibility</a>
+            <a class="more" href="#how">See how it works</a>
+          </div>
+        </div>
+        <aside class="glance" aria-label="At a glance">
+          <div class="eyebrow">At a glance</div>
+          <ul>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>$0 for you.</b> The pilot covers the membership for its full length.</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Works on the phone or tablet you already own.</b> No device? Your county office can lend you a tablet with internet included.</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Help to get started.</b> Your county office can set it up with you, by phone or in person.</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Voluntary.</b> You decide who joins your care circle, and you can stop at any time.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="runs" aria-label="Who runs the pilot">
+      <div class="wrap">
+        <div><b>Funded by New York State</b><span>Through the Office for the Aging (NYSOFA).</span></div>
+        <div><b>Run by AgingNY</b><span>The association of New York’s 59 county Area Agencies on Aging.</span></div>
+        <div><b>Delivered by your county office</b><span>The Office for the Aging you already know enrolls you and helps you set up.</span></div>
+      </div>
+    </section>
+
+    <section class="gets">
+      <div class="wrap">
+        <div class="side">
+          <div class="eyebrow">What you get to do</div>
+          <h2>Live at home, with your people close by.</h2>
+          <p>VivaLynx is an app for you and your care circle: the family, friends and helpers you choose. Everyone sees the same picture, and you decide who sees what.</p>
+        </div>
+        <dl>
+          <dt><h3>Stay close to family, from anywhere</h3></dt>
+          <dd>One tap starts a video call with a daughter in Albany or a grandson in Texas. When something needs attention, the people you choose get an alert.</dd>
+          <dt><h3>Keep medications on track</h3></dt>
+          <dd>A reminder at the right time, a tap to confirm, and a quiet word to your care circle if a dose is missed. No pill boxes to photograph.</dd>
+          <dt><h3>Check in once a day</h3></dt>
+          <dd>Ten seconds in the morning: how you slept, how you feel. Your family knows you are doing fine without calling to ask.</dd>
+          <dt><h3>Reach a clinician without leaving home</h3></dt>
+          <dd>Telemedicine is included. Talk to a clinician from your kitchen, and most visits end right there.</dd>
+          <dt><h3>Give everyone one shared picture</h3></dt>
+          <dd>Medications, appointments and care notes in one place, so your aide, your case manager and your family stop working from different lists.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="deep on-dark">
+      <div class="wrap">
+        <p>Your care circle sees what it needs to see. You decide who that is.</p>
+        <small>VivaLynx meets HIPAA requirements. Your information is never sold, and every person in your circle has only the access you give them.</small>
+      </div>
+    </section>
+
+    <section class="who" id="who">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Who qualifies</div>
+          <h2>Three things make you eligible.</h2>
+          <p>You need all three. Medicaid is never required, and your insurance does not matter.</p>
+        </div>
+        <div>
+          <ul>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>You are 60 or older</b> and live in New York State.</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Your county Office for the Aging is part of the pilot.</b> The participating counties are listed below.</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>One of these is true:</b> you are on a waiting list for EISEP or another county aging service; you or someone who cares for you receives caregiver-support services; or you are going home from a participating hospital.</span></li>
+          </ul>
+          <div class="counties">
+            <b>Participating counties</b>
+            Erie, Monroe, Onondaga, Westchester, Saratoga, Otsego and St. Lawrence, with more joining through 2027. If your county is not listed, your Office for the Aging can tell you when it will be.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="wrap">
+        <div class="eyebrow">How it works</div>
+        <h2>Check, get your code, set up.</h2>
+        <ol>
+          <li><b>Check your eligibility</b><p>Your email and date of birth, below. We match them against your county office’s list.</p></li>
+          <li><b>We email your access code</b><p>The code is the only thing you need, along with instructions you can follow in about a minute.</p></li>
+          <li><b>Set up the app and invite your circle</b><p>Create your account, enter the code, and invite the people you choose. Each of them decides whether to join.</p></li>
+        </ol>
+        <p class="phone">Would you rather do this by phone, or have a family member do it for you? Both work. Your county office can enroll you and set up the app with you, and a family member can create the account and invite you into it.</p>
+      </div>
+    </section>
+
+    <section class="check" id="check">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Check your eligibility</div>
+          <h2>Two details, and you will know right away.</h2>
+          <p>We check your email and date of birth against your county office’s list. If they match, your access code is on its way to your inbox.</p>
+          <p class="note">On this demo page the check is simulated: a date of birth that makes you 60 or older passes, and nothing you type is sent or stored.</p>
+        </div>
+        <div>
+          <form class="elig" id="elig" novalidate>
+            <div class="row" id="r-email">
+              <label for="email">Email address <span class="hint">The one your county office has for you.</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="margaret.ellis@example.com" required>
+              <div class="err" id="e-email">Please enter an email address, like name@example.com.</div>
+            </div>
+            <div class="row" id="r-dob">
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date" autocomplete="bday" required max="2026-10-27">
+              <div class="err" id="e-dob">Please enter your date of birth.</div>
+            </div>
+            <button class="btn" type="submit">Check my eligibility</button>
+            <p class="fine">Checking takes a moment. Your details are used only to find you on your county office’s list.</p>
+          </form>
+
+          <div class="result yes" id="yes" role="status" aria-live="polite">
+            <div class="eyebrow">Good news</div>
+            <h3>You are eligible, and your code is on its way.</h3>
+            <p>We matched your details with <b id="county-yes">Oneida County Office for the Aging</b>. The pilot covers your VivaLynx membership in full.</p>
+            <div class="code">
+              <div class="eyebrow">Your access code</div>
+              <strong>NYSOFA</strong>
+            </div>
+            <p>We have emailed it to <b id="masked">m•••@example.com</b> with the three setup steps. Enter the code once, when you create your account.</p>
+            <div class="acts">
+              <a class="btn" href="../email/">See the email</a>
+              <a class="btn quiet" href="#">Get the app</a>
+            </div>
+            <p class="again"><a href="#check" id="again-yes">Check a different email</a></p>
+          </div>
+
+          <div class="result no" id="no" role="status" aria-live="polite">
+            <div class="eyebrow">Not found</div>
+            <h3>We could not match those details to a participating county’s list.</h3>
+            <p>That happens more often than you would think, usually because the county has a different email on file. Here is what to do.</p>
+            <ul>
+              <li><b>Call your county Office for the Aging</b> and ask for the VivaLynx pilot. They can check their list, update your email, and enroll you on the spot.</li>
+              <li><b>Call NY Connects</b> if you are not sure which office serves you. They will connect you to the right county.</li>
+              <li><b>Going home from the hospital?</b> Ask your discharge planner to enroll you before you leave. They can set up your care circle with you.</li>
+            </ul>
+            <p class="again"><a href="#check" id="again-no">Try again</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Questions people ask</div>
+          <h2>Before you check.</h2>
+        </div>
+        <dl>
+          <dt>Is it really free?</dt>
+          <dd>Yes. The State funds the pilot, and it covers your VivaLynx membership for the pilot’s full length. There is no card to enter and nothing that starts charging later.</dd>
+          <dt>I do not have a smartphone or a tablet.</dt>
+          <dd>Your county office can lend you a tablet with internet service included, for as long as you take part.</dd>
+          <dt>Can my daughter set it up for me?</dt>
+          <dd>Yes. A family member can create the account, enter your code and invite you into the care circle. Many people start that way.</dd>
+          <dt>What about my privacy?</dt>
+          <dd>VivaLynx meets HIPAA requirements. You choose who is in your care circle and what each person can see, and you can change that at any time. Your information is never sold.</dd>
+          <dt>Do I need Medicaid?</dt>
+          <dd>No. The pilot serves eligible older New Yorkers regardless of insurance.</dd>
+          <dt>What if I want to stop?</dt>
+          <dd>Taking part is voluntary. Tell your county office or delete your account, and that is that.</dd>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site on-dark">
+    <div class="wrap">
+      <div>
+        <img src="../assets/vivalynx-lockup-white.svg" alt="VivaLynx">
+        <p>VivaLynx for the New York State Technology-Enabled Aging-in-Place Pilot, administered by AgingNY with participating county Area Agencies on Aging.</p>
+        <p>Demo page. Illustrative only; the pilot described here is a proposal.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#who">Who qualifies</a>
+        <a href="#how">How it works</a>
+        <a href="#check">Check eligibility</a>
+        <a href="#">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Simulated check: nothing leaves the page. 60 or older by date of birth passes.
+    const form = document.getElementById('elig');
+    const yes = document.getElementById('yes'), no = document.getElementById('no');
+    const email = document.getElementById('email'), dob = document.getElementById('dob');
+    const rEmail = document.getElementById('r-email'), rDob = document.getElementById('r-dob');
+    const btn = form.querySelector('button');
+    const counties = ['Erie', 'Monroe', 'Onondaga', 'Westchester', 'Saratoga', 'Otsego', 'St. Lawrence'];
+
+    function mask(addr) {
+      const [user, host] = addr.split('@');
+      return user[0] + '•••@' + host;
+    }
+    function age(d) {
+      const now = new Date(); let a = now.getFullYear() - d.getFullYear();
+      const m = now.getMonth() - d.getMonth();
+      if (m < 0 || (m === 0 && now.getDate() < d.getDate())) a--;
+      return a;
+    }
+    function hide() { yes.classList.remove('show'); no.classList.remove('show'); form.style.display = ''; }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const okEmail = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email.value.trim());
+      const d = dob.valueAsDate;
+      rEmail.classList.toggle('bad', !okEmail);
+      rDob.classList.toggle('bad', !d);
+      if (!okEmail || !d) { (okEmail ? dob : email).focus(); return; }
+      btn.disabled = true; btn.textContent = 'Checking…';
+      setTimeout(() => {
+        btn.disabled = false; btn.textContent = 'Check my eligibility';
+        const eligible = age(d) >= 60;
+        if (eligible) {
+          // A stable county for the demo, picked from the address rather than at random
+          const pick = counties[[...email.value].reduce((n, c) => n + c.charCodeAt(0), 0) % counties.length];
+          document.getElementById('county-yes').textContent = pick + ' County Office for the Aging';
+          document.getElementById('masked').textContent = mask(email.value.trim().toLowerCase());
+        }
+        form.style.display = 'none';
+        (eligible ? yes : no).classList.add('show');
+        (eligible ? yes : no).scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }, 900);
+    });
+    document.getElementById('again-yes').addEventListener('click', hide);
+    document.getElementById('again-no').addEventListener('click', hide);
+    email.addEventListener('input', () => rEmail.classList.remove('bad'));
+    dob.addEventListener('input', () => rDob.classList.remove('bad'));
+  </script>
+</body>
+</html>
