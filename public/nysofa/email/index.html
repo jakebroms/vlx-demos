@@ -15,203 +15,106 @@
       --t100: #CFF3EE;
       --t600: #008A83;
       --t900: #064542;
-      --t950: #032F2D;
-      --amber: #C98A1E;
       --amber-dark: #78510D;
       --amber-tint: #FFF9E8;
       --amber-border: #FFE8A3;
       --ink: #172033;
       --muted: #5B6472;
       --border: #D8DEE8;
-      --surface: #F8FAFC;
       --serif: Literata, Georgia, "Times New Roman", serif;
-      --sans: "Source Sans 3", system-ui, "Segoe UI", Arial, sans-serif;
+      --sans: "Source Sans 3", Arial, Helvetica, sans-serif;
+      /* the mail client's own chrome */
+      --app: #F6F8FC;
+      --app-ink: #1F1F1F;
+      --app-muted: #5F6368;
+      --app-line: #E3E6EA;
+      --app-hover: #EAECF0;
+      --app-font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { background: var(--surface); }
-    body {
-      min-height: 100%;
-      font: 400 18px/1.7 var(--sans);
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--primary); }
-
-    /* Demo strip above the mail client */
-    .demo {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px 14px;
-      padding: 10px 20px;
-      border-bottom: 1px solid var(--border);
-      background: #fff;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--muted);
-    }
-    .demo b { font-weight: 700; color: var(--ink); }
-    .chip {
-      display: inline-block;
-      padding: 1px 8px;
-      border: 1px solid var(--amber);
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--amber-dark);
-    }
-
-    /* Mail client chrome */
-    .client { max-width: 900px; margin: 0 auto; padding: 24px 16px 96px; }
-    .subject {
-      font: 600 24px/1.3 var(--serif);
-      font-variation-settings: "opsz" 24;
-      letter-spacing: -0.01em;
-      margin: 8px 0 18px;
-    }
-    .meta {
-      display: grid;
-      grid-template-columns: 44px minmax(0, 1fr) auto;
-      gap: 12px 14px;
-      align-items: start;
-      padding: 0 0 18px;
-      border-bottom: 1px solid var(--border);
-      font-size: 16px;
-      line-height: 24px;
-    }
-    .avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--t50);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 15px;
-    }
-    .meta .from b { font-weight: 700; }
-    .meta .from span { color: var(--muted); }
-    .meta .to { color: var(--muted); }
-    .meta .date { color: var(--muted); white-space: nowrap; font-size: 15px; }
-
-    /* The email itself, at a real email width */
-    .mail {
-      max-width: 640px;
-      margin: 28px auto 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #fff;
-      overflow: hidden;
-    }
-    .band {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 32px;
-      border-bottom: 1px solid var(--border);
-      background: var(--t50);
-    }
-    .band img { height: 30px; width: auto; display: block; }
-    .band span { font-size: 15px; line-height: 20px; color: var(--t900); font-weight: 600; text-align: right; max-width: 230px; }
-    .body { padding: 32px 32px 8px; }
-    .body p { margin: 0 0 16px; }
-    .body h1 {
-      font: 700 32px/1.15 var(--serif);
-      font-variation-settings: "opsz" 32;
-      letter-spacing: -0.015em;
-      margin: 0 0 16px;
-    }
-    .body h2 {
-      font: 600 22px/1.3 var(--serif);
-      font-variation-settings: "opsz" 22;
-      letter-spacing: -0.01em;
-      margin: 32px 0 12px;
-    }
-    .eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .code {
-      margin: 24px 0;
-      padding: 20px 24px;
-      border: 1px solid var(--amber-border);
-      border-radius: 8px;
-      background: var(--amber-tint);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px 24px;
-    }
-    .code .eyebrow { color: var(--amber-dark); }
-    .code strong {
-      display: block;
-      font: 700 40px/1.1 var(--serif);
-      font-variation-settings: "opsz" 40;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-    }
-    .code small { font-size: 16px; line-height: 24px; color: var(--muted); max-width: 240px; }
-
-    ol.steps { list-style: none; counter-reset: step; margin: 0 0 8px; }
-    ol.steps li {
-      counter-increment: step;
-      display: grid;
-      grid-template-columns: 36px minmax(0, 1fr);
-      gap: 0 16px;
-      padding: 16px 0;
-      border-top: 1px solid var(--border);
-    }
-    ol.steps li:first-child { border-top: 0; }
-    ol.steps li::before {
-      content: counter(step);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-    }
-    ol.steps b { display: block; font-size: 20px; line-height: 1.4; font-weight: 600; }
-    ol.steps p { margin: 4px 0 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
-    .stores { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .store, .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .store { border: 1px solid var(--ink); color: var(--ink); background: #fff; }
-    .btn { background: var(--primary); color: #fff; border: 1px solid var(--primary); font-size: 18px; padding: 12px 24px; }
-    .btn:hover { background: var(--t600); }
-    .cta { margin: 28px 0 8px; }
+    html, body { height: 100%; }
+    body { background: var(--app); color: var(--app-ink); font: 14px/1.4 var(--app-font); -webkit-font-smoothing: antialiased; }
     svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
 
-    /* Animated sign-up preview, the "GIF" of the email */
-    .gif { margin: 28px 0 8px; padding: 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
-    .gif .eyebrow { margin-bottom: 14px; }
-    .gif-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 36px; }
+    /* ---- Mail client ---- */
+    .app { display: flex; flex-direction: column; height: 100%; min-height: 100vh; }
+    .bar { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 16px; flex-shrink: 0; }
+    .bar .ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: var(--app-muted); }
+    .bar .ic:hover { background: var(--app-hover); }
+    .bar .word { font-size: 22px; color: var(--app-muted); margin-right: 24px; letter-spacing: -0.01em; }
+    .search { flex: 1; max-width: 720px; height: 46px; border-radius: 23px; background: #E9EEF6; display: flex; align-items: center; gap: 12px; padding: 0 8px 0 18px; color: var(--app-muted); font-size: 15px; }
+    .search input { flex: 1; border: 0; background: transparent; font: 16px var(--app-font); color: var(--app-ink); min-width: 0; }
+    .search input::placeholder { color: var(--app-muted); }
+    .bar .right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .demo { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--app-line); border-radius: 999px; background: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--app-muted); }
+    .demo b { width: 7px; height: 7px; border-radius: 50%; background: #C98A1E; }
+    .me { width: 32px; height: 32px; border-radius: 50%; background: #5B6472; color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+
+    .cols { flex: 1; display: flex; min-height: 0; }
+    .folders { width: 232px; flex-shrink: 0; padding: 8px 12px 16px 8px; }
+    .compose { display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px 0 18px; margin: 0 0 14px 8px; border-radius: 16px; background: #C2E7FF; color: #001D35; font-size: 14px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+    .folders ul { list-style: none; }
+    .folders li { display: flex; align-items: center; gap: 16px; height: 32px; padding: 0 12px 0 24px; border-radius: 0 16px 16px 0; color: var(--app-ink); font-size: 14px; }
+    .folders li.on { background: #D3E3FD; font-weight: 700; }
+    .folders li span { flex: 1; }
+    .folders li small { font-size: 12px; font-weight: 700; }
+    .folders svg.i { width: 18px; height: 18px; }
+
+    .pane { flex: 1; min-width: 0; margin: 0 16px 16px 0; background: #fff; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
+    .tools { display: flex; align-items: center; gap: 2px; height: 48px; padding: 0 8px; border-bottom: 1px solid var(--app-line); color: var(--app-muted); }
+    .tools .ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; }
+    .tools .ic:hover { background: var(--app-hover); color: var(--app-ink); }
+    .tools .sep { width: 1px; height: 20px; background: var(--app-line); margin: 0 8px; }
+    .tools .count { margin-left: auto; font-size: 12px; padding-right: 8px; }
+    .scroll { flex: 1; overflow: auto; padding: 0 0 48px; }
+
+    .subject { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 20px 72px 4px; font: 400 22px/1.3 var(--app-font); color: var(--app-ink); }
+    .subject .label { font-size: 12px; padding: 2px 8px; border-radius: 4px; background: var(--app-hover); color: var(--app-muted); }
+    .sender { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 0 16px; align-items: start; padding: 14px 24px 10px; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--primary); color: #fff; font: 600 14px var(--app-font); }
+    .sender .who { font-size: 14px; }
+    .sender .who b { font-weight: 700; }
+    .sender .who span { color: var(--app-muted); }
+    .sender .tome { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; color: var(--app-muted); margin-top: 2px; }
+    .sender .tome svg.i { width: 16px; height: 16px; }
+    .sender .meta { display: flex; align-items: center; gap: 2px; color: var(--app-muted); font-size: 12px; white-space: nowrap; }
+    .sender .meta .ic { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; }
+    .sender .meta .ic:hover { background: var(--app-hover); color: var(--app-ink); }
+    .sender .meta time { margin-right: 6px; }
+
+    .replyrow { display: flex; gap: 8px; padding: 20px 24px 8px 80px; }
+    .replyrow span { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid #747775; border-radius: 18px; font-size: 14px; font-weight: 600; color: var(--app-ink); }
+    .replyrow svg.i { width: 18px; height: 18px; }
+
+    /* ---- The email itself ---- */
+    .mailbody { padding: 8px 24px 0 80px; }
+    .mail { max-width: 600px; font: 16px/1.5 var(--sans); color: var(--ink); }
+    .mail .head { padding: 8px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .mail .head img { height: 52px; width: auto; display: block; }
+    .mail p { margin: 0 0 16px; }
+    .mail h1 { font: 600 24px/1.3 var(--serif); font-variation-settings: "opsz" 24; letter-spacing: -0.01em; margin: 0 0 16px; color: var(--ink); }
+    .mail .code { margin: 20px 0 24px; padding: 18px 20px; border: 1px solid var(--amber-border); border-radius: 8px; background: var(--amber-tint); text-align: center; }
+    .mail .code small { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-dark); margin-bottom: 4px; }
+    .mail .code strong { display: block; font: 700 36px/1.2 var(--serif); font-variation-settings: "opsz" 36; letter-spacing: 0.1em; color: var(--ink); }
+    .mail .code span { display: block; font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .mail ol { margin: 0 0 20px 22px; }
+    .mail ol li { margin: 0 0 10px; padding-left: 4px; }
+    .mail .btn { display: inline-block; margin: 4px 0 24px; padding: 12px 22px; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; text-decoration: none; }
+    .mail .btn:hover { background: var(--t600); }
+    .mail .sig { margin-top: 24px; }
+    .mail .sig b { font-weight: 700; }
+    .mail .foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .mail .foot p { margin: 0 0 8px; }
+    .mail .foot a { color: var(--muted); }
+
+    /* The animated preview, dropped in like an embedded GIF */
+    .gif { margin: 4px 0 20px; }
+    .gif .frame { display: inline-block; padding: 14px 18px 10px; border: 1px solid var(--border); border-radius: 8px; background: #FAFBFC; }
     .phone {
       position: relative;
       width: 272px;
       height: 560px;
-      flex-shrink: 0;
       padding: 10px;
       border-radius: 40px;
       background: #0B0B0C;
@@ -299,44 +202,21 @@
     .done h3 { font-size: 24px; }
     .done .sub { font-size: 14px; }
     .tag { display: inline-block; margin: 2px 0 14px; padding: 3px 10px; border-radius: 6px; background: var(--amber-tint); border: 1px solid var(--amber-border); color: var(--amber-dark); font-size: 12px; font-weight: 700; }
-    .gif-text { flex: 1 1 220px; min-width: 0; }
-    .gif-text p { font-size: 16px; line-height: 1.55; color: var(--muted); margin: 0 0 12px; }
-    .ctrl { display: flex; gap: 8px; }
-    .ctrl button {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--ink);
-      font: 600 14px/20px var(--sans);
-      cursor: pointer;
-    }
-    .ctrl button:hover { border-color: var(--ink); }
-    .ctrl svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    .ctrl { display: flex; gap: 14px; justify-content: center; margin-top: 10px; }
+    .ctrl button { display: inline-flex; align-items: center; gap: 5px; border: 0; background: transparent; color: var(--muted); font: 600 12px/16px var(--sans); cursor: pointer; padding: 2px 4px; }
+    .ctrl button:hover { color: var(--ink); }
+    .ctrl svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
     .ctrl .fill svg { fill: currentColor; stroke: none; }
 
-    .help { margin: 24px 0 0; padding: 20px 24px; border-radius: 8px; background: var(--t50); font-size: 17px; line-height: 1.6; }
-    .help b { font-weight: 700; }
-    .foot {
-      margin-top: 24px;
-      padding: 20px 32px 24px;
-      border-top: 1px solid var(--border);
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--muted);
-    }
-    .foot p { margin: 0 0 8px; }
-    .foot a { color: var(--muted); }
-
-    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
-    @media (max-width: 640px) {
-      .band, .body, .foot { padding-left: 20px; padding-right: 20px; }
-      .body h1 { font-size: 28px; }
-      .meta { grid-template-columns: 44px minmax(0, 1fr); }
-      .meta .date { grid-column: 2; white-space: normal; }
+    @media (max-width: 1000px) { .folders { display: none; } .pane { margin-left: 16px; } }
+    @media (max-width: 720px) {
+      .bar .word, .search { display: none; }
+      .subject { padding: 16px 20px 4px; font-size: 19px; }
+      .sender { padding: 12px 16px 8px; }
+      .mailbody { padding: 8px 16px 0; }
+      .replyrow { padding-left: 16px; }
+      .pane { margin: 0 8px 8px; }
+      .mail .head img { height: 44px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .scr, .check, .pbtn { transition: none; }
@@ -345,120 +225,140 @@
   </style>
 </head>
 <body>
-  <div class="demo">
-    <span class="chip">Demo</span>
-    <span><b>Stop 1 of 3: the invitation.</b> What a participant enrolled at hospital discharge receives. Nothing here is a live program.</span>
-  </div>
-
-  <div class="client">
-    <h1 class="subject">Your VivaLynx membership is covered by the NYSOFA pilot</h1>
-    <div class="meta">
-      <div class="avatar" aria-hidden="true">VL</div>
-      <div>
-        <div class="from"><b>VivaLynx for Oneida County Office for the Aging</b> <span>&lt;hello@vivalynx.com&gt;</span></div>
-        <div class="to">to Margaret Ellis &lt;margaret.ellis@example.com&gt;</div>
+  <div class="app">
+    <header class="bar">
+      <span class="ic" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></span>
+      <span class="word">Mail</span>
+      <label class="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" placeholder="Search mail" aria-label="Search mail"></label>
+      <div class="right">
+        <span class="demo" title="Illustrative demo of the invitation a participant receives. Nothing here is a live program."><b aria-hidden="true"></b>Demo</span>
+        <span class="me" aria-hidden="true">ME</span>
       </div>
-      <div class="date">Fri, Oct 24, 2026, 10:12 AM</div>
+    </header>
+
+    <div class="cols">
+      <aside class="folders" aria-label="Folders">
+        <span class="compose"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Compose</span>
+        <ul>
+          <li class="on"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg><span>Inbox</span><small>1</small></li>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Starred</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Snoozed</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg><span>Sent</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><span>Drafts</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><span>More</span></li>
+        </ul>
+      </aside>
+
+      <section class="pane" aria-label="Message">
+        <div class="tools">
+          <span class="ic" title="Back to Inbox"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></span>
+          <span class="sep"></span>
+          <span class="ic" title="Archive"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg></span>
+          <span class="ic" title="Report spam"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span>
+          <span class="ic" title="Delete"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></span>
+          <span class="sep"></span>
+          <span class="ic" title="Mark as unread"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <span class="ic" title="Snooze"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="ic" title="More"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+          <span class="count">1 of 42</span>
+        </div>
+
+        <div class="scroll">
+          <h1 class="subject">Your VivaLynx membership is covered by the NYSOFA pilot <span class="label">Inbox</span></h1>
+          <div class="sender">
+            <div class="avatar" aria-hidden="true">VL</div>
+            <div class="who">
+              <div><b>VivaLynx</b> <span>&lt;hello@vivalynx.com&gt;</span></div>
+              <div class="tome">to me <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+            </div>
+            <div class="meta">
+              <time datetime="2026-10-24T10:12">Fri, Oct 24, 10:12 AM</time>
+              <span class="ic" title="Star"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+              <span class="ic" title="Reply"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg></span>
+              <span class="ic" title="More"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+            </div>
+          </div>
+
+          <div class="mailbody">
+            <div class="mail">
+              <div class="head"><img src="../assets/vivalynx-lockup.svg" alt="VivaLynx"></div>
+
+              <p>Hi Margaret,</p>
+              <h1>Your VivaLynx membership is covered.</h1>
+              <p>Oneida County Office for the Aging has enrolled you in New York State’s Aging-in-Place Pilot, and the pilot pays for your VivaLynx membership in full. There is nothing for you to pay, now or later.</p>
+              <p>VivaLynx keeps you connected to the people you choose. A short daily check-in lets your family know you’re doing fine, reminders keep your medications on track, and a video call with your daughter is one tap away.</p>
+
+              <div class="code">
+                <small>Your access code</small>
+                <strong>NYSOFA</strong>
+                <span>Enter it once, when you set up your account. It’s the only thing you need.</span>
+              </div>
+
+              <p>Getting started takes about a minute:</p>
+              <ol>
+                <li><b>Get the VivaLynx app</b> on the phone or tablet you already own. If you don’t have one, we can lend you a tablet with internet included.</li>
+                <li><b>Create your account</b> with your name, your email and a password. When the app asks for an access code, type <b>NYSOFA</b>.</li>
+                <li><b>Invite your care circle.</b> We’ve already invited your daughter Maria, since you named her at the hospital. Add anyone else you choose; each person decides whether to join.</li>
+              </ol>
+
+              <p>Here’s what it looks like:</p>
+              <div class="gif">
+                <div class="frame">
+                  <div class="phone" id="phone" aria-label="Animated preview of signing up and entering the access code">
+                    <div class="glass">
+                      <div class="scr" id="s1">
+                        <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
+                        <h3>Create your account</h3>
+                        <div class="sub">Your details stay private. You choose who sees what.</div>
+                        <div class="fld"><label>Your name</label><div class="in" id="f-name"><span class="t"></span><span class="caret"></span></div></div>
+                        <div class="fld"><label>Email</label><div class="in" id="f-email"><span class="t"></span><span class="caret"></span></div></div>
+                        <div class="fld"><label>Password</label><div class="in" id="f-pass"><span class="t"></span><span class="caret"></span></div></div>
+                        <div class="pbtn" id="b1">Continue</div>
+                      </div>
+                      <div class="scr" id="s2">
+                        <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
+                        <h3>Do you have an access code?</h3>
+                        <div class="sub">If a county office, hospital or program gave you a code, enter it here. If not, skip this step.</div>
+                        <div class="fld"><label>Access code</label><div class="in code-in" id="f-code"><span class="t"></span><span class="caret"></span></div></div>
+                        <div class="pbtn" id="b2">Apply code</div>
+                        <div class="pbtn ghost">Skip for now</div>
+                      </div>
+                      <div class="scr done" id="s3">
+                        <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+                        <h3>You’re covered</h3>
+                        <span class="tag">NYSOFA Aging-in-Place Pilot</span>
+                        <div class="sub">Your VivaLynx membership is paid for by the pilot. $0 today, $0 a month.</div>
+                        <div class="pbtn">Invite your care circle</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ctrl">
+                    <button type="button" id="play" class="fill" aria-label="Pause"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg><span>Pause</span></button>
+                    <button type="button" id="replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg><span>Replay</span></button>
+                  </div>
+                </div>
+              </div>
+
+              <a class="btn" href="#">Get the VivaLynx app</a>
+
+              <p>Would you rather do this with someone? Call Oneida County Office for the Aging and ask for the VivaLynx pilot, or just reply to this email. We’re glad to set it up with you over the phone or at your kitchen table.</p>
+
+              <p class="sig">Warmly,<br><b>The VivaLynx team</b><br>with Oneida County Office for the Aging</p>
+
+              <div class="foot">
+                <p>You’re receiving this email because Oneida County Office for the Aging enrolled you in the New York State Technology-Enabled Aging-in-Place Pilot on October 24, 2026. VivaLynx sent it on the county’s behalf. Taking part is voluntary, and you can stop at any time.</p>
+                <p>VivaLynx · <a href="#">vivalynx.com</a> · <a href="#">Privacy</a> · <a href="#">Unsubscribe</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="replyrow" aria-hidden="true">
+            <span><svg class="i" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>Reply</span>
+            <span><svg class="i" viewBox="0 0 24 24"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>Forward</span>
+          </div>
+        </div>
+      </section>
     </div>
-
-    <article class="mail" aria-label="Email message">
-      <div class="band">
-        <img src="../assets/vivalynx-lockup.svg" alt="VivaLynx">
-        <span>for the NYSOFA Technology-Enabled Aging-in-Place Pilot</span>
-      </div>
-
-      <div class="body">
-        <p>Hi Margaret,</p>
-        <h1>Your VivaLynx membership is covered.</h1>
-        <p>Oneida County Office for the Aging has enrolled you in the NYSOFA Aging-in-Place Pilot, so VivaLynx costs you nothing: $0 today and $0 a month for the length of the pilot. It keeps you and the people you choose connected, with daily check-ins, medication reminders and a video call that is one tap away.</p>
-
-        <div class="code">
-          <div>
-            <div class="eyebrow">Your access code</div>
-            <strong>NYSOFA</strong>
-          </div>
-          <small>Enter it once, when you set up your account. That is the only thing you need.</small>
-        </div>
-
-        <h2>Three steps, about a minute</h2>
-        <ol class="steps">
-          <li>
-            <div>
-              <b>Get the app</b>
-              <p>On the smartphone or tablet you already own. If you don’t have one, your county office can lend you a tablet with internet included.</p>
-              <div class="stores">
-                <a class="store" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Download on the App Store</a>
-                <a class="store" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Get it on Google Play</a>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div>
-              <b>Create your account and enter your code</b>
-              <p>Your name, your email and a password. When the app asks for an access code, type <b>NYSOFA</b>. You’ll see a message confirming the pilot is covering you.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <b>Invite your care circle</b>
-              <p>We’ve already invited <b>Maria Ellis</b>, your daughter, because you named her at the hospital. Add anyone else you choose: family, a neighbor, your home care aide. Each person decides whether to join.</p>
-            </div>
-          </li>
-        </ol>
-
-        <div class="gif">
-          <div class="eyebrow">What setup looks like</div>
-          <div class="gif-row">
-            <div class="phone" id="phone" aria-label="Animated preview of signing up and entering the access code">
-              <div class="glass">
-                <div class="scr" id="s1">
-                  <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
-                  <h3>Create your account</h3>
-                  <div class="sub">Your details stay private. You choose who sees what.</div>
-                  <div class="fld"><label>Your name</label><div class="in" id="f-name"><span class="t"></span><span class="caret"></span></div></div>
-                  <div class="fld"><label>Email</label><div class="in" id="f-email"><span class="t"></span><span class="caret"></span></div></div>
-                  <div class="fld"><label>Password</label><div class="in" id="f-pass"><span class="t"></span><span class="caret"></span></div></div>
-                  <div class="pbtn" id="b1">Continue</div>
-                </div>
-                <div class="scr" id="s2">
-                  <img class="logo" src="../assets/vivalynx-lockup.svg" alt="">
-                  <h3>Do you have an access code?</h3>
-                  <div class="sub">If a county office, hospital or program gave you a code, enter it here. If not, skip this step.</div>
-                  <div class="fld"><label>Access code</label><div class="in code-in" id="f-code"><span class="t"></span><span class="caret"></span></div></div>
-                  <div class="pbtn" id="b2">Apply code</div>
-                  <div class="pbtn ghost">Skip for now</div>
-                </div>
-                <div class="scr done" id="s3">
-                  <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-                  <h3>You’re covered</h3>
-                  <span class="tag">NYSOFA Aging-in-Place Pilot</span>
-                  <div class="sub">Your VivaLynx membership is paid for by the pilot. $0 today, $0 a month.</div>
-                  <div class="pbtn">Invite your care circle</div>
-                </div>
-              </div>
-            </div>
-            <div class="gif-text">
-              <p>Create an account, type the code, done. The animation loops; in the real email it is a short GIF.</p>
-              <div class="ctrl">
-                <button type="button" id="play" class="fill" aria-label="Pause"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg><span>Pause</span></button>
-                <button type="button" id="replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg><span>Replay</span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="cta"><a class="btn" href="#"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Get the VivaLynx app</a></p>
-
-        <div class="help">
-          <b>Would you rather do this with someone?</b> Call Oneida County Office for the Aging and ask for the VivaLynx pilot, or reply to this email. They can set it up with you over the phone or at your kitchen table, and can lend you a tablet if you need one.
-        </div>
-      </div>
-
-      <div class="foot">
-        <p>You’re receiving this because Oneida County Office for the Aging enrolled you in the NYSOFA Technology-Enabled Aging-in-Place Pilot on Oct 24, 2026. VivaLynx sent it on their behalf. Taking part is voluntary, and you can stop at any time.</p>
-        <p><a href="#">Privacy</a> · <a href="#">How the pilot works</a> · <a href="#">Unsubscribe</a></p>
-      </div>
-    </article>
   </div>
 
   <script>
